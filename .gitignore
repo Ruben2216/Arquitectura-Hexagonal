@@ -1,9 +1,3 @@
-# Entorno virtual de Python
-pweb2/
-venv/
-env/
-ENV/
-.venv
 
 # Flutter SDK (no debe subirse)
 flutter/
@@ -19,28 +13,3 @@ dist/
 build/
 *.egg
 
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-
-# Base de datos
-*.db
-*.sqlite
-*.sqlite3
-
-# Variables de entorno
-.env
-.env.local
-
-# Logs
-*.log
-logs/
-
-# Archivos temporales
-*.tmp
-*.bak
-*.cache

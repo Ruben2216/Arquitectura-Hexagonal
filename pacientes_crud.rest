@@ -1,0 +1,36 @@
+
+@baseUrl = http://localhost:8002
+@pacienteId = 1ad64649-df6b-4ae2-b3ed-2f9cb01fb2be
+
+###  CREATE - Crear usuario
+POST {{baseUrl}}/pacientes
+Content-Type: application/json
+
+{
+  "username": "ruben_clemente",
+  "email": "ruben@unach.mx"
+}
+
+### . READ - Obtener todos los usuarios
+GET {{baseUrl}}/pacientes
+
+### . UPDATE - Actualizar usuario 
+PUT {{baseUrl}}/pacientes/{{pacienteId}}
+Content-Type: application/json
+
+{
+  "username": "ruben_clemente_Actualizado",
+  "email": "ruben_nuevo@unach.mx"
+}
+
+###  PATCH - Desactivar usuario
+PATCH {{baseUrl}}/pacientes/{{pacienteId}}/deactivate
+
+###  PATCH - Activar usuario
+PATCH {{baseUrl}}/pacientes/{{pacienteId}}/activate
+
+
+### DELETE - Eliminar usuario
+DELETE {{baseUrl}}/pacientes/{{pacienteId}}
+
+

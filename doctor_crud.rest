@@ -1,0 +1,40 @@
+@puerto = http://localhost:8001
+@doctorId = 91ec56dd-2f9c-4ae6-837b-bae8267e7ef4
+
+
+### CREATE - Crear un nuevo doctor
+POST {{puerto}}/doctores
+Content-Type: application/json
+
+{
+    "nombre": "Dr. Jose Ruben",
+    "especialidad": "xxx"
+}
+
+###
+
+### READ - Obtener todos los doctores
+GET {{puerto}}/doctores
+
+###
+
+### READ - Obtener un doctor por ID
+GET {{puerto}}/doctores/{{doctorId}}
+
+###
+
+### UPDATE - Actualizar un doctor
+PUT {{puerto}}/doctores/{{doctorId}}
+Content-Type: application/json
+
+{
+    "nombre": "Dr. Jose Ruben Clemente",
+    "especialidad": "patologia"
+}
+
+###
+
+### DELETE - Eliminar un doctor
+DELETE {{puerto}}/doctores/{{doctorId}}
+
+###

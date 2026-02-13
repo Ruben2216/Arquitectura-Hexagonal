@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:8004
+@pedidoId = 650d72ef-6c25-4f4b-b19c-e80cf4ddb549
+
+###  CREATE - Crear pedido
+POST {{baseUrl}}/pedidos
+Content-Type: application/json
+
+{
+  "usuarioId": "1ad64649-df6b-4ae2-b3ed-2f9cb01fb2be",
+  "descripcion": "Pedido de material xxx",
+  "cantidad": 5
+}
+
+### . READ - Obtener todos los pedidos
+GET {{baseUrl}}/pedidos
+
+### . READ - Obtener pedido por ID
+GET {{baseUrl}}/pedidos/{{pedidoId}}
+
+### . READ - Obtener pedidos por usuario
+GET {{baseUrl}}/pedidos/usuario/1ad64649-df6b-4ae2-b3ed-2f9cb01fb2be
+
+### . UPDATE - Actualizar pedido 
+PUT {{baseUrl}}/pedidos/{{pedidoId}}
+Content-Type: application/json
+
+{
+  "descripcion": "Pedido actualizado de equipos",
+  "cantidad": 10
+}
+
+### DELETE - Eliminar pedido
+DELETE {{baseUrl}}/pedidos/{{pedidoId}}

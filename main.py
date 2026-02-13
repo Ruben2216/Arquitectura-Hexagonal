@@ -13,6 +13,10 @@ from pweb2.doctor.application.services.doctor_servicio import DoctorServicio
 from pweb2.doctor.infrastructure.persistence.datosMemoria import InMemoryDoctorRepository
 from pweb2.doctor.domain.doctor import DoctorCreate, DoctorUpdate
 
+from pweb2.pedidos.application.services.pedido_servicio import PedidoServicio
+from pweb2.pedidos.infrastructure.persistence.datosMemoria import InMemoryPedidoRepository
+from pweb2.pedidos.domain.pedido import PedidoCreate, PedidoUpdate
+
 app = FastAPI()
 
 # Inicializar repositorio en memoria y servicio
@@ -24,6 +28,9 @@ paciente_service = pacienteServicio(paciente_repository)
 
 doctor_repository = InMemoryDoctorRepository()
 doctor_service = DoctorServicio(doctor_repository)
+
+pedido_repository = InMemoryPedidoRepository()
+pedido_service = PedidoServicio(pedido_repository)
 
 with open('recetas.json', 'r', encoding='utf-8') as archivo:
     datosRecetas = json.load(archivo)
@@ -209,3 +216,47 @@ def delete_doctor(doctor_id: str):
     if not doctor_service.delete_doctor(doctor_id):
         raise HTTPException(status_code=404, detail="Doctor no encontrado")
     return {"message": "Doctor eliminado correctamente"}
+
+
+@app.post("/pedidos", status_code=201)
+def create_pedido(pedidoData: PedidoCreate):
+    try:
+        return pedido_service.registrarPedido(pedidoData)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/pedidos")
+def get_all_pedidos():
+    return pedido_service.getAllPedido()
+
+
+@app.get("/pedidos/{pedido_id}")
+def get_pedido(pedido_id: str):
+    pedido = pedido_service.getPedido(pedido_id)
+    if not pedido:
+        raise HTTPException(status_code=404, detail="Pedido no encontrado")
+    return pedido
+
+
+@app.get("/pedidos/usuario/{usuario_id}")
+def get_pedidos_by_usuario(usuario_id: str):
+    return pedido_service.getPedidosByUsuario(usuario_id)
+
+
+@app.put("/pedidos/{pedido_id}")
+def update_pedido(pedido_id: str, pedidoUpdate: PedidoUpdate):
+    try:
+        pedido = pedido_service.updatePedido(pedido_id, pedidoUpdate)
+        if not pedido:
+            raise HTTPException(status_code=404, detail="Pedido no encontrado")
+        return pedido
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.delete("/pedidos/{pedido_id}")
+def delete_pedido(pedido_id: str):
+    if not pedido_service.deletePedido(pedido_id):
+        raise HTTPException(status_code=404, detail="Pedido no encontrado")
+    return {"message": "Pedido eliminado correctamente"}

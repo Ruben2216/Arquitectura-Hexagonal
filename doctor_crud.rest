@@ -1,5 +1,5 @@
 @puerto = http://localhost:8001
-@doctorId = 91ec56dd-2f9c-4ae6-837b-bae8267e7ef4
+@doctorId = aedc89bf-4e52-42ed-981d-8a16802400c7
 
 
 ### CREATE - Crear un nuevo doctor
